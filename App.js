@@ -5,17 +5,6 @@ import TopUp from './components/TopUp';
 
 class HomeScreenBrowser extends React.Component {
 
-  navigate() {
-    this.props.navigation.navigate('TopUp',{
-      memberId: "12345",
-      balance: 5000,
-      email:"mihnea@points.com",
-      firstName:"Mihnea",
-      lastName:"Galeteanu",
-      transactionQuantity: 3000
-    });
-  }
-
   openBrowser() {
     Linking.openURL("https://buymiles.mileageplus.com/united/united_landing_page/");
   }
