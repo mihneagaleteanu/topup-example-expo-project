@@ -59,8 +59,28 @@ const RootStack = createStackNavigator(
 
 const AppContainer = createAppContainer(RootStack);
 
+// gets the current screen from navigation state
+function getActiveRouteName(navigationState) {
+  if (!navigationState) {
+    return null;
+  }
+  const route = navigationState.routes[navigationState.index];
+  // dive into nested navigators
+  if (route.routes) {
+    return getActiveRouteName(route);
+  }
+  return route.routeName;
+}
+
 export default class App extends React.Component {
   render() {
-    return <AppContainer />;
+    return <AppContainer onNavigationStateChange={(prevState, currentState, action) => {
+      const currentScreen = getActiveRouteName(currentState);
+      const prevScreen = getActiveRouteName(prevState);
+
+      if (currentScreen == "Home") {
+        Alert.alert('',"Check for a balance update",[{text: 'REFRESH BALANCE'}]);
+      }
+    }}/>;
   }
 }
